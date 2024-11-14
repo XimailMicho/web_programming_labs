@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit event</title>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+    </style>
 </head>
 <body>
 <form th:action="@{/events/edit/{eventId}(eventId=${event.id})}" th:object="${event}" method="POST">
@@ -21,8 +27,8 @@
 
         <!-- Event Price -->
         <div>
-            <label for="eventPopularityScore">Price:</label>
-            <input type="number" min="1" max="10"  step="0.1" id="eventPopularityScore" th:field="*{popularityScore}" placeholder="Enter event price" required>
+            <label for="eventPopularityScore">Location:</label>
+            <input type="number" min="1" max="10"  step="0.1" id="eventPopularityScore" th:field="*{popularityScore}" placeholder="Select event location" required>
         </div>
 
         <!-- Event Location (Category) -->

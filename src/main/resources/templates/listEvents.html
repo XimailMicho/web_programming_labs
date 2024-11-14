@@ -70,19 +70,19 @@
         <form action="/events/add" method="get">
             <!-- Input for the first string -->
             <label for="eventName">Event Name</label>
-            <input type="text" placeholder="event name ..." id="eventName" name="eventName" required><br><br>
+            <input type="text" placeholder="Enter event name" id="eventName" name="eventName" required><br><br>
 
             <!-- Input for the second string -->
             <label for="eventDescription">Description</label>
-            <input type="text" id="eventDescription" name="eventDescription" required><br><br>
+            <input type="text" id="eventDescription" placeholder="Enter event description"  name="eventDescription" required><br><br>
 
             <!-- Input for decimal -->
             <label for="eventRating">Rating </label>
-            <input type="number" id="eventRating" name="eventRating" step="0.1" required><br><br>
+            <input type="number" id="eventRating" name="eventRating" placeholder="Enter event popularity score"  step="0.1" required><br><br>
 
             <!-- Select menu for ID -->
-            <label for="eventLocationID">Location ID:</label>
-            <select id="eventLocationID" name="eventLocationID" required>
+            <label for="eventLocationID" >Location ID:</label>
+            <select id="eventLocationID" name="eventLocationID"  required>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
