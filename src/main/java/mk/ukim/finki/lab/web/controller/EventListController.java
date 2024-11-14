@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/list")
+@RequestMapping("/controller/list")
 public class EventListController {
     private final EventService eventService;
 

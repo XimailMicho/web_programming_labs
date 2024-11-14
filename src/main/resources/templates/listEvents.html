@@ -18,14 +18,21 @@
     <!-- Display radio buttons for each event,
             the value should be the event name
             and the displayed text should be Name: <event_name>, Description: <event_description>, Rating: <popularity_score> -->
+    <form action="/list" method="post">
+        <input type="text" name="query" placeholder="Search..." required>
+        <button type="submit">Search</button>
+    </form>
 
-    <div>
+    <div th:if="${events != null}">
+    <form action="/booking" method="post">
+
         <table>
             <thead>
             <tr>
                 <th scope="col">Event name</th>
                 <th scope="col">Description</th>
                 <th scope="col">Popularity score</th>
+                <th scope="col">Location</th>
             </tr>
             </thead>
             <tbody>
@@ -33,17 +40,59 @@
                 <td th:text="${event.getName()}"></td>
                 <td th:text="${event.getDescription()}"></td>
                 <td th:text="${event.getPopularityScore()}"></td>
-                <td><input type="radio" th:name="'selectedEvent'" th:value="${event.name}"/></td>
+                <td th:text="${event.getLocation()}"></td>
+                <td><input type="radio" th:name="selectedEvent" th:value="${event.name}"/></td>
+                <td>
+                    <form th:action="@{/events/edit/{eventId}(eventId=${event.id})}" th:object="${event}" method="get">
+                        <button type="submit">Edit</button>
+                    </form>
+                </td>
+                <td>
+                    <form th:action="@{/events/delete/{eventId}(eventId=${event.id})}" method="post">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
             </tr>
             </tbody>
         </table>
 
+
+
+        <h2>Choose number of tickets:</h2>
+        <input type="number" name="numTickets" min="1" max="10"><br/>
+        <br/>
+        <input type="submit" value="Submit">
+    </form>
     </div>
 
-    <h2>Choose number of tickets:</h2>
-    <input type="number" name="numTickets" min="1" max="10"><br/>
-    <br/>
-    <input type="submit" value="Submit">
+    <div>
+        <h4>Add an event</h4>
+        <form action="/events/add" method="get">
+            <!-- Input for the first string -->
+            <label for="eventName">Event Name</label>
+            <input type="text" placeholder="event name ..." id="eventName" name="eventName" required><br><br>
+
+            <!-- Input for the second string -->
+            <label for="eventDescription">Description</label>
+            <input type="text" id="eventDescription" name="eventDescription" required><br><br>
+
+            <!-- Input for decimal -->
+            <label for="eventRating">Rating </label>
+            <input type="number" id="eventRating" name="eventRating" step="0.1" required><br><br>
+
+            <!-- Select menu for ID -->
+            <label for="eventLocationID">Location ID:</label>
+            <select id="eventLocationID" name="eventLocationID" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select><br><br>
+
+            <!-- Submit Button -->
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
 </main>
 </body>
 </html>

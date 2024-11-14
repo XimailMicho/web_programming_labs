@@ -5,10 +5,10 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class EventBooking {
-    String eventName;
-    String attendeeName;
-    String attendeeAdress;
-    Long numberOfTickets;
+    private String eventName;
+    private String attendeeName;
+    private String attendeeAdress;
+    private Long numberOfTickets;
 
 
 }

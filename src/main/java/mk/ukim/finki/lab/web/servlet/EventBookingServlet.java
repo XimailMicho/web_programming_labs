@@ -13,26 +13,15 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
 import java.io.IOException;
 
-@WebServlet(name = "EventListServlet",urlPatterns = "/list")
-public class EventListServlet extends HttpServlet {
-    private final EventService eventService;
+@WebServlet(name = "EventBookingServlet",urlPatterns = "/servlet/booking")
+public class EventBookingServlet extends HttpServlet {
+
     private final SpringTemplateEngine springTemplateEngine;
+    private final EventService eventService;
 
-    public EventListServlet(EventService eventService, SpringTemplateEngine springTemplateEngine) {
-        this.eventService = eventService;
+    public EventBookingServlet(SpringTemplateEngine springTemplateEngine, EventService eventService) {
         this.springTemplateEngine = springTemplateEngine;
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        IWebExchange webExchange = JakartaServletWebApplication
-                .buildApplication(getServletContext())
-                .buildExchange(req, resp);
-
-        WebContext context = new WebContext(webExchange);
-
-//        context.setVariable("events",eventService.listAll());
-        springTemplateEngine.process("listEvents.html",context,resp.getWriter());
+        this.eventService = eventService;
     }
 
     @Override
@@ -43,8 +32,16 @@ public class EventListServlet extends HttpServlet {
 
         WebContext context = new WebContext(webExchange);
 
-        String query = req.getParameter("query");
-        context.setVariable("events",eventService.searchEvents(query));
-        springTemplateEngine.process("listEvents.html",context,resp.getWriter());
+        String eventName = req.getParameter("selectedEvent");
+        Integer numberTickets = Integer.parseInt(req.getParameter("numTickets"));
+        String ipAddress = req.getHeader("X-FORWARDED-FOR");
+        if (ipAddress == null) {
+            ipAddress = req.getRemoteAddr();
+        }
+
+        context.setVariable("eventName",eventName);
+        context.setVariable("numTickets",numberTickets);
+        context.setVariable("clientIP",ipAddress);
+        springTemplateEngine.process("bookingConfirmation.html",context,resp.getWriter());
     }
 }

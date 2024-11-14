@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.net.http.HttpRequest;
+
 @Controller
 @RequestMapping("/booking")
 public class EventBookingController {
@@ -19,7 +21,9 @@ public class EventBookingController {
     @PostMapping
     public String getBookingPage(@RequestParam("selectedEvent") String selectedEvent,
                                  @RequestParam("numTickets") int numTickets , Model model){
+        model.addAttribute("eventName",selectedEvent);
+        model.addAttribute("numTickets",numTickets);
 
-        return "bookingConfiguration";
+        return "bookingConfirmation";
     }
 }
