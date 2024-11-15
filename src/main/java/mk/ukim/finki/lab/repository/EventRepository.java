@@ -2,6 +2,7 @@ package mk.ukim.finki.lab.repository;
 
 import mk.ukim.finki.lab.model.Event;
 import mk.ukim.finki.lab.model.EventBooking;
+import mk.ukim.finki.lab.model.Location;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -77,5 +78,9 @@ public class EventRepository {
                 break;
             }
         }
+    }
+
+    public void deleteByLocation(Long id) {
+        events.removeIf(event -> Objects.equals(event.getLocation().getId(), id));
     }
 }

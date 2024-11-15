@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            margin: auto;
+        }
+        div{
+            display: flex;
+            width: 800px;
+            margin: auto;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div style="display: flex">
+        <form action="/locations/add" method="post">
+            <div><label for="locationName">Location name</label>
+                <input type="text" id="locationName" name="locationName"></div>
+            <div><label for="locationAdress">Adress</label>
+                <input type="text" id="locationAdress" name="locationAdress"></div>
+            <div><label for="locationCapacity">Capacity</label>
+                <input type="number" id="locationCapacity" name="locationCapacity"></div>
+            <div><label for="locationDescription">Description</label>
+                <input type="text" id="locationDescription" name="locationDescription"></div>
+
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+</body>
+</html>

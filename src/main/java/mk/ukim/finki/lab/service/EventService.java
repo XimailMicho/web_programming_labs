@@ -1,6 +1,7 @@
 package mk.ukim.finki.lab.service;
 
 import mk.ukim.finki.lab.model.Event;
+import mk.ukim.finki.lab.model.Location;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,4 +16,5 @@ public interface EventService {
     Event findByName(String eventName);
 
     void deleteByID(Long id);
+    void deleteByLocation(Long id);
 }

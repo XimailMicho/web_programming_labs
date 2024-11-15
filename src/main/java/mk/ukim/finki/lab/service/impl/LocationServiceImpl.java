@@ -22,4 +22,14 @@ public class LocationServiceImpl implements LocationService {
     public Location findByID(Long id) {
         return locationRepository.findByID(id);
     }
+
+    @Override
+    public void deleteByID(Long locationID) {
+        locationRepository.deleteByID(locationID);
+    }
+
+    @Override
+    public void addLocation(Location l) {
+        locationRepository.addLocation(l);
+    }
 }

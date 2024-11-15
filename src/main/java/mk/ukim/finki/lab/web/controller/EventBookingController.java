@@ -20,7 +20,9 @@ public class EventBookingController {
 
     @PostMapping
     public String getBookingPage(@RequestParam("selectedEvent") String selectedEvent,
-                                 @RequestParam("numTickets") int numTickets , Model model){
+                                 @RequestParam("numTickets") Integer numTickets, Model model){
+
+
         model.addAttribute("eventName",selectedEvent);
         model.addAttribute("numTickets",numTickets);
 

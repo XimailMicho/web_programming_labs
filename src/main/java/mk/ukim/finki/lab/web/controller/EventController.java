@@ -20,6 +20,7 @@ public class EventController {
     @GetMapping("/events")
     public String getEventsPage(@RequestParam(required = false) String error, Model model){
         model.addAttribute("events",eventService.listAll());
+        model.addAttribute("locations",locationService.findAll());
         return "listEvents";
     }
     @GetMapping("/events/add")

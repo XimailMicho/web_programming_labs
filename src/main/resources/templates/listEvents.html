@@ -81,18 +81,47 @@
             <input type="number" id="eventRating" name="eventRating" placeholder="Enter event popularity score"  step="0.1" required><br><br>
 
             <!-- Select menu for ID -->
-            <label for="eventLocationID" >Location ID:</label>
+            <label for="eventLocationID" >Location Name:</label>
             <select id="eventLocationID" name="eventLocationID"  required>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
+                <th:block th:each="location : ${locations}">
+                    <option th:value="${location.id}" th:text="${location.name}"></option>
+                </th:block>
             </select><br><br>
 
             <!-- Submit Button -->
             <button type="submit">Submit</button>
         </form>
     </div>
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th scope="col">Location name</th>
+                <th scope="col">Location adress</th>
+                <th scope="col">Capacity</th>
+                <th scope="col">Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="location : ${locations}">
+                <td th:text="${location.name}"></td>
+                <td th:text="${location.address}"></td>
+                <td th:text="${location.capacity}"></td>
+                <td th:text="${location.description}"></td>
 
+
+                <td>
+                    <form th:action="@{/locations/delete/{locationID}(locationID=${location.id})}" method="post">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <form action="/locations/add" method="get">
+            <button type="submit">Add new location</button>
+        </form>
+    </div>
 </main>
 </body>
 </html>

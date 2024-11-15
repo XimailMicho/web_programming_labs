@@ -9,4 +9,7 @@ import java.util.List;
 public interface LocationService {
     public List<Location> findAll();
     public Location findByID(Long id);
+
+    void deleteByID(Long locationID);
+    void addLocation(Location l);
 }

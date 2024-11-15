@@ -1,6 +1,7 @@
 package mk.ukim.finki.lab.service.impl;
 
 import mk.ukim.finki.lab.model.Event;
+import mk.ukim.finki.lab.model.Location;
 import mk.ukim.finki.lab.repository.EventRepository;
 import mk.ukim.finki.lab.service.EventService;
 import org.springframework.stereotype.Service;
@@ -48,5 +49,10 @@ public class EventServiceImpl implements EventService {
     @Override
     public void deleteByID(Long id) {
         eventRepository.deleteByID(id);
+    }
+
+    @Override
+    public void deleteByLocation(Long id) {
+        eventRepository.deleteByLocation(id);
     }
 }

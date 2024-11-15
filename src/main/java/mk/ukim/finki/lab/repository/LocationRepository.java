@@ -15,9 +15,9 @@ public class LocationRepository {
 
     public LocationRepository() {
         this.locations = new ArrayList<>();
-        locations.add(new Location(Long.parseLong("1"),"Finki","Rugjer Boskovikj 16","450","Fakultet"));
-        locations.add(new Location(Long.parseLong("2"),"Laboratorium","Kaj evropski","1000","Venue"));
-        locations.add(new Location(Long.parseLong("3"),"MKC","Karsi jumbo","5000","Venue"));
+        locations.add(new Location("Finki","Rugjer Boskovikj 16","450","Fakultet"));
+        locations.add(new Location("Laboratorium","Kaj evropski","1000","Venue"));
+        locations.add(new Location("MKC","Karsi jumbo","5000","Venue"));
     }
 
     public List<Location> findAll(){
@@ -30,5 +30,18 @@ public class LocationRepository {
                 .findFirst();
 
         return location.get();
+    }
+
+    public void deleteByID(Long locationID) {
+        for (Location location : locations) {
+            if (Objects.equals(location.getId(),locationID)){
+                locations.remove(location);
+                break;
+            }
+        }
+    }
+
+    public void addLocation(Location l) {
+        locations.add(l);
     }
 }
