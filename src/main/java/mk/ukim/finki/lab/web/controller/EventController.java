@@ -27,7 +27,7 @@ public class EventController {
     public String addEvent(@RequestParam("eventName") String eventName, @RequestParam("eventDescription")
                            String eventDescription, @RequestParam("eventRating") Double eventRating,
                            @RequestParam("eventLocationID") Long id){
-        Location location = locationService.findByID(id);
+        Location location = locationService.findById(id).get();
         Event event = new Event(eventName,eventDescription,eventRating,location);
         eventService.addEvent(event);
         return "redirect:/events";
@@ -35,14 +35,14 @@ public class EventController {
 
     @GetMapping("/events/edit/{eventID}")
     public String editEvent(@PathVariable Long eventID, Model model){
-        Event event = eventService.findByID(eventID);
+        Event event = eventService.findByID(eventID).get();
         model.addAttribute("event",event);
         return "editEvent";
     }
 
     @PostMapping("/events/edit/{eventID}")
     public String editEventAndRedirect(@PathVariable Long eventID,@ModelAttribute Event event, Model model){
-        Location byID = locationService.findByID(event.getLocation().getId());
+        Location byID = locationService.findById(event.getLocation().getId()).get();
         event.setLocation(byID);
         eventService.editEvent(event);
         model.addAttribute("events",eventService.listAll());

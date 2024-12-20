@@ -1,19 +1,18 @@
-package mk.ukim.finki.lab.repository;
+package mk.ukim.finki.lab.repository.InMemory;
 
 import mk.ukim.finki.lab.model.Location;
 import org.springframework.stereotype.Repository;
 
-import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
 @Repository
-public class LocationRepository {
+public class InMemoryLocationRepository {
     private List<Location> locations;
 
-    public LocationRepository() {
+    public InMemoryLocationRepository() {
         this.locations = new ArrayList<>();
         locations.add(new Location("Finki","Rugjer Boskovikj 16","450","Fakultet"));
         locations.add(new Location("Laboratorium","Kaj evropski","1000","Venue"));

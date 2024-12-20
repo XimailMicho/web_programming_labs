@@ -1,8 +1,7 @@
-package mk.ukim.finki.lab.repository;
+package mk.ukim.finki.lab.repository.InMemory;
 
 import mk.ukim.finki.lab.model.Event;
 import mk.ukim.finki.lab.model.EventBooking;
-import mk.ukim.finki.lab.model.Location;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -12,11 +11,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
-public class EventRepository {
+public class InMemoryEventRepository {
     private List<Event> events;
     private List<EventBooking> bookings;
-    private final LocationRepository locationRepository;
-    public EventRepository(LocationRepository locationRepository) {
+    private final InMemoryLocationRepository locationRepository;
+    public InMemoryEventRepository(InMemoryLocationRepository locationRepository) {
         this.events = new ArrayList<>();
         this.bookings = new ArrayList<>();
         this.locationRepository = locationRepository;

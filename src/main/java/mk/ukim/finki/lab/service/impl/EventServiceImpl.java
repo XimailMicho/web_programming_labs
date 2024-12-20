@@ -2,11 +2,13 @@ package mk.ukim.finki.lab.service.impl;
 
 import mk.ukim.finki.lab.model.Event;
 import mk.ukim.finki.lab.model.Location;
-import mk.ukim.finki.lab.repository.EventRepository;
+import mk.ukim.finki.lab.repository.jpa.EventRepository;
 import mk.ukim.finki.lab.service.EventService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class EventServiceImpl implements EventService {
     private final EventRepository eventRepository;
@@ -25,20 +27,21 @@ public class EventServiceImpl implements EventService {
         if(text == null || text.isEmpty()){
             throw new IllegalArgumentException();
         }
-        return eventRepository.searchEvents(text);
+        return eventRepository.findByNameContainingOrDescriptionContaining(text,text);
     }
     public void addEvent(Event event){
-        eventRepository.addEvent(event);
+        eventRepository.save(event);
     }
 
     @Override
-    public Event findByID(Long id) {
-        return eventRepository.findByID(id);
+    public Optional<Event> findByID(Long id) {
+        return eventRepository.findById(id);
     }
 
     @Override
     public void editEvent(Event e) {
-        eventRepository.editEvent(e);
+        eventRepository.deleteById(e.getId());
+        eventRepository.save(e);
     }
 
     @Override
@@ -48,11 +51,11 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public void deleteByID(Long id) {
-        eventRepository.deleteByID(id);
+        eventRepository.deleteById(id);
     }
 
     @Override
-    public void deleteByLocation(Long id) {
+    public void deleteByLocation(Location id) {
         eventRepository.deleteByLocation(id);
     }
 }

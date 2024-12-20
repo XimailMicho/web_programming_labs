@@ -1,6 +1,5 @@
 package mk.ukim.finki.lab.web.controller;
 
-import mk.ukim.finki.lab.model.Event;
 import mk.ukim.finki.lab.model.Location;
 import mk.ukim.finki.lab.service.EventService;
 import mk.ukim.finki.lab.service.LocationService;
@@ -22,8 +21,8 @@ public class LocationController {
 
     @PostMapping("/delete/{locationID}")
     public String deleteLocation(@PathVariable Long locationID, Model model){
-        eventService.deleteByLocation(locationID);
-        locationService.deleteByID(locationID);
+        eventService.deleteByLocation(locationService.findById(locationID).get());
+        locationService.deleteById(locationID);
         model.addAttribute("events",eventService.listAll());
         return "redirect:/events";
     }
