@@ -1,4 +1,4 @@
-<html>
+<html xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <title>Event Booking page - Welcome and choose an Event</title>
@@ -12,6 +12,9 @@
 <body>
 <header xmlns:th="http://www.thymeleaf.org">
     <h1>Welcome to our Event Booking App</h1>
+    <form action="/logout" method="POST">
+        <button type="submit">Logout</button>
+    </form>
 </header>
 <main>
     <h2>Choose an event:</h2>
@@ -42,12 +45,12 @@
                 <td th:text="${event.getPopularityScore()}"></td>
                 <td th:text="${event.getLocation()}"></td>
                 <td><input type="radio" th:name="selectedEvent" th:value="${event.name}"/></td>
-                <td>
-                    <form th:action="@{/events/edit/{eventId}(eventId=${event.id})}" th:object="${event}" method="get">
+                <td sec:authorize="hasRole('ROLE_ADMIN')">
+                    <form  th:action="@{/events/edit/{eventId}(eventId=${event.id})}" th:object="${event}" method="get">
                         <button type="submit">Edit</button>
                     </form>
                 </td>
-                <td>
+                <td sec:authorize="hasRole('ROLE_ADMIN')">
                     <form th:action="@{/events/delete/{eventId}(eventId=${event.id})}" method="post">
                         <button type="submit">Delete</button>
                     </form>
@@ -89,7 +92,7 @@
             </select><br><br>
 
             <!-- Submit Button -->
-            <button type="submit">Submit</button>
+            <button sec:authorize="hasRole('ROLE_ADMIN')" type="submit">Submit</button>
         </form>
     </div>
     <div>
@@ -118,8 +121,8 @@
             </tr>
             </tbody>
         </table>
-        <form action="/locations/add" method="get">
-            <button type="submit">Add new location</button>
+        <form  action="/locations/add" method="get">
+            <button sec:authorize="hasRole('ROLE_ADMIN')" type="submit">Add new location</button>
         </form>
     </div>
 </main>
